@@ -57,7 +57,7 @@ def check_and_call():
     print("Function called on:", current_time)
 
     # Define the specific time of the new day when you want to call the function
-    specific_time = datetime.time(0, 10, 0)  # Adjust this to your desired time (hour, minute, second)
+    specific_time = datetime.time(8, 0, 0)  # Adjust this to your desired time (hour, minute, second)
     # Check if the current time is equal to or after the specific time
 
     if current_time.time() >= specific_time:
@@ -65,14 +65,14 @@ def check_and_call():
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         next_day_time = datetime.datetime.combine(tomorrow, specific_time)
         time_difference = (next_day_time - current_time)
-        print("Sleep for ", time_difference)
+        print("Sleep until ", next_day_time)
         time.sleep(time_difference.total_seconds())
     else:
         # Wait until specific refresh time.
         today = datetime.date.today()
         next_refresh = datetime.datetime.combine(today, specific_time)
         time_difference = (next_refresh - current_time)
-        print("Sleep for ", time_difference)
+        print("Sleep until ", next_refresh)
         time.sleep(time_difference.total_seconds())
 
 # Run the loop continuously
