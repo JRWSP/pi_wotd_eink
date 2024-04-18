@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 
+import textwrap
+
 def get_wotd():
     url='https://www.dictionary.com/e/word-of-the-day/'
     r=requests.get(url)
