@@ -67,5 +67,5 @@ check_and_call()
 # For example, you can run this code in a loop with a sleep interval
 for _ in range(2):
     # Simulating the passage of time by adding a day
-    last_call_date += datetime.timedelta(days=1)
+    last_call_date -= datetime.timedelta(days=1)
     check_and_call()
