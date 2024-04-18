@@ -64,13 +64,13 @@ def check_and_call():
         # Wait until the next day
         tomorrow = datetime.date.today() + datetime.timedelta(seconds=15)
         next_day_time = datetime.datetime.combine(tomorrow, specific_time)
-        time_difference = (next_day_time - datetime.datetime.now()).total_seconds()
+        time_difference = (next_day_time - current_time).total_seconds()
         time.sleep(time_difference)
     else:
         # Wait until specific refresh time.
         today = datetime.date.today()
         next_refresh = datetime.datetime.combine(today, specific_time)
-        time_difference = (next_refresh - datetime.datetime.now()).total_seconds()
+        time_difference = (next_refresh - current_time).total_seconds()
         time.sleep(time_difference)
 
 # Run the loop continuously
