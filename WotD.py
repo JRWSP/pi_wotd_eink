@@ -62,17 +62,18 @@ def check_and_call():
 
     if current_time.time() >= specific_time:
         # Wait until the next day
-        #tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-        #next_day_time = datetime.datetime.combine(tomorrow, specific_time)
-        #time_difference = (next_day_time - current_time).total_seconds()
-        time_difference = 15
-        time.sleep(time_difference)
+        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+        next_day_time = datetime.datetime.combine(tomorrow, specific_time)
+        time_difference = (next_day_time - current_time)
+        print("Sleep for ", time_difference)
+        time.sleep(time_difference.total_seconds())
     else:
         # Wait until specific refresh time.
         today = datetime.date.today()
         next_refresh = datetime.datetime.combine(today, specific_time)
-        time_difference = (next_refresh - current_time).total_seconds()
-        time.sleep(time_difference)
+        time_difference = (next_refresh - current_time)
+        print("Sleep for ", time_difference)
+        time.sleep(time_difference.total_seconds())
 
 # Run the loop continuously
 while True:
