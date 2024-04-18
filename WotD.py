@@ -20,7 +20,8 @@ def get_wotd():
     wotd=[wotd[i] for i in (0,1,2,7,8)]
     wotd[0] = ', '.join(wotd[0].split(', ')[1:]) #Remove day.
     wotd[1] = wotd[1].strip().title() #clean big space and capitalize first letter.
-    wotd[2] = wotd[2].lstrip() #Get rid of loeading long blank space.
+    wotd[2] = wotd[2].lstrip() #Get rid of leading long blank space.
+    wotd[3] = wotd[3].rstrip() #Get rid of following blank space.
     return wotd
 
 def wotd_to_display(wotd):
