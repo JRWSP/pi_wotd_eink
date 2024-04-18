@@ -1,14 +1,10 @@
 import epd2in13_V4 as display #For 2.13inch screen.
 from PIL import Image, ImageDraw, ImageFont
+import datetime
 from WotD import get_wotd
 import textwrap
 
-epd = display.EPD() # get the display
-epd.init()           # initialize the display
-print("Clear...")    # prints to console, not the display, for debugging
-epd.Clear()      # clear the display
-
-def printToDisplay(wotd):
+def wotd_to_display(wotd):
     date, word, phonetic, word_type, definition = wotd
     word_type = "("+word_type+")"
 
@@ -32,6 +28,9 @@ def printToDisplay(wotd):
     HBlackImage = HBlackImage.rotate(180, expand=1)
     epd.display(epd.getbuffer(HBlackImage))
 
+epd = display.EPD() # get the display
+epd.init()           # initialize the display
+print("Clear...")    # prints to console, not the display, for debugging
+epd.Clear()      # clear the display
 
-
-printToDisplay(get_wotd())
+wotd_to_display(get_wotd())
