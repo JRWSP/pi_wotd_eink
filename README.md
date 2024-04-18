@@ -1,7 +1,11 @@
-# Word of the Day with E-Ink display and Raspberry Pi
+# Get smarter everyday by leaning Word of the Day.
 
-Display word of the day from [Dictionary.com](https://www.dictionary.com/e/word-of-the-day/) when start running. 
+Display a word of the day from [Dictionary.com](https://www.dictionary.com/e/word-of-the-day/) when start running. 
 Refresh again for a new word every day morning at 8am. 
+
+This project aim for simplicity. Only 1 micro-USB is needed. Once installed, just plug-and-learn, thanks to very low energy needed for both Raspberry Pi and e-ink display, 
+
+![wotd picture](/wotd_picture.jpg)
 
 # Hardware
 - Raspberry Pi Zero W/WH (Zero 2 might work as well)
