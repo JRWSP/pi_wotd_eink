@@ -21,7 +21,7 @@ def printToDisplay(wotd):
     font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
     draw.text((2, 2), date, font = font_date, fill = 0) #draw date
-    draw.text((2,42), word_type, font=font_def, fill=0) #draw word type.
+    draw.text((2,42), word_type+" "+phonetic, font=font_def, fill=0) #draw word type and phonetic.
     draw.text((5, 20), word, font = font_word, fill = 0) #draw word
     definition = textwrap.wrap(definition,width=36) #draw meaning
     y=0
