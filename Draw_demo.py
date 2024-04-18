@@ -18,16 +18,16 @@ def printToDisplay(wotd):
     draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer.
     font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 15)
     font_word = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 20)
-    font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 10)
+    font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
     draw.text((2, 2), date, font = font_date, fill = 0) #draw date
-    draw.text((2,22), word_type, font=font_def, fill=0) #draw word type.
-    draw.text((4, 20), word, font = font_word, fill = 0) #draw word
-    definition = textwrap.wrap(definition,width=38) #draw meaning
+    draw.text((2,42), word_type, font=font_def, fill=0) #draw word type.
+    draw.text((5, 20), word, font = font_word, fill = 0) #draw word
+    definition = textwrap.wrap(definition,width=36) #draw meaning
     y=0
     for def_line in definition:
         draw.text((5, 60+y), def_line, font = font_def, fill = 0)
-        y+=10
+        y+=11
 
     HBlackImage = HBlackImage.rotate(180, expand=1)
     epd.display(epd.getbuffer(HBlackImage))
