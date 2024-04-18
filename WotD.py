@@ -1,5 +1,6 @@
 import epd2in13_V4 as display #For 2.13inch screen.
 from PIL import Image, ImageDraw, ImageFont
+import time
 import datetime
 import textwrap
 from bs4 import BeautifulSoup
@@ -7,8 +8,8 @@ import requests
 
 epd = display.EPD() # get the display
 epd.init()           # initialize the display
-print("Clear...")    # prints to console, not the display, for debugging
-epd.Clear()      # clear the display
+#print("Clear...")    # prints to console, not the display, for debugging
+#epd.Clear()      # clear the display
 
 def get_wotd():
     url='https://www.dictionary.com/e/word-of-the-day/'
@@ -47,25 +48,31 @@ def wotd_to_display(wotd):
     epd.display(epd.getbuffer(HBlackImage))
 
 def check_and_call():
-    global last_call_date
-    today = datetime.date.today()
-    if last_call_date is None or today > last_call_date:
-        # Your function logic goes here
-        print("Clear...")    # prints to console, not the display, for debugging
-        epd.Clear()      # clear the display
-        wotd_to_display(get_wotd())
-        print("Function called on:", datetime.datetime.now())
-        last_call_date = datetime.date.today()
+    #Call for first time after reboot.
+    print("Clear...")    # prints to console, not the display, for debugging
+    epd.Clear()      # clear the display
+    wotd_to_display(get_wotd())
+    # Get the current time
+    current_time = datetime.datetime.now()
+    print("Function called on:", current_time)
 
-# Global variable to keep track of the last call date
-last_call_date = None
-# Initial call to set the last_call_date
-check_and_call()
+    # Define the specific time of the new day when you want to call the function
+    specific_time = datetime.time(0, 2, 0)  # Adjust this to your desired time (hour, minute, second)
+    # Check if the current time is equal to or after the specific time
 
-# Simulation of the passage of time
-# You can replace this with your actual code or use a scheduler to run this periodically
-# For example, you can run this code in a loop with a sleep interval
-for _ in range(2):
-    # Simulating the passage of time by adding a day
-    last_call_date -= datetime.timedelta(days=1)
+    if current_time.time() >= specific_time:
+        # Wait until the next day
+        tomorrow = datetime.date.today() + datetime.timedelta(seconds=15)
+        next_day_time = datetime.datetime.combine(tomorrow, specific_time)
+        time_difference = (next_day_time - datetime.datetime.now()).total_seconds()
+        time.sleep(time_difference)
+    else:
+        # Wait until specific refresh time.
+        today = datetime.date.today()
+        next_refresh = datetime.datetime.combine(today, specific_time)
+        time_difference = (next_refresh - datetime.datetime.now()).total_seconds()
+        time.sleep(time_difference)
+
+# Run the loop continuously
+while True:
     check_and_call()
