@@ -65,7 +65,7 @@ def check_and_call():
         #tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         #next_day_time = datetime.datetime.combine(tomorrow, specific_time)
         #time_difference = (next_day_time - current_time).total_seconds()
-        time_difference(15)
+        time_difference = 15
         time.sleep(time_difference)
     else:
         # Wait until specific refresh time.
