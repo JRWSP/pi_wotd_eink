@@ -16,7 +16,9 @@ def printToDisplay(wotd):
     font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 15) # Create our font, passing in the font file and font size
 
     
-    draw.text((10, 15), date, font = font, fill = 0)
+    draw.text((2, 2), date, font = font, fill = 0)
+    draw.text((2, 20), word, font = font, fill = 0)
+    draw.text((2, 40), definition, font = font, fill = 0)
 
     HBlackImage = HBlackImage.rotate(180, expand=1)
     epd.display(epd.getbuffer(HBlackImage))
