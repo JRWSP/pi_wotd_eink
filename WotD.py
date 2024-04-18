@@ -51,6 +51,8 @@ def check_and_call():
     today = datetime.date.today()
     if last_call_date is None or today > last_call_date:
         # Your function logic goes here
+        print("Clear...")    # prints to console, not the display, for debugging
+        epd.Clear()      # clear the display
         wotd_to_display(get_wotd())
         print("Function called on:", datetime.datetime.now())
         last_call_date = datetime.date.today()
