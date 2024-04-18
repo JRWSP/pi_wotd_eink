@@ -57,7 +57,7 @@ def check_and_call():
     print("Function called on:", current_time)
 
     # Define the specific time of the new day when you want to call the function
-    specific_time = datetime.time(0, 2, 0)  # Adjust this to your desired time (hour, minute, second)
+    specific_time = datetime.time(0, 10, 0)  # Adjust this to your desired time (hour, minute, second)
     # Check if the current time is equal to or after the specific time
 
     if current_time.time() >= specific_time:
