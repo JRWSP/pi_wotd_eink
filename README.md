@@ -3,7 +3,7 @@
 Display a word of the day from [Dictionary.com](https://www.dictionary.com/e/word-of-the-day/) when start running. 
 Refresh again for a new word every day morning at 8am. 
 
-This project aim for simplicity. Only 1 micro-USB is needed. Once installed, just plug-and-learn, thanks to very low energy needed for both Raspberry Pi and e-ink display, 
+This project aim for simplicity. Only 1 micro-USB is needed. Once installed, just plug-and-learn, thanks to very low energy needed for both Raspberry Pi and e-ink display. The word will not disappear even if turned off.
 
 ![wotd picture](/wotd_picture.jpg)
 
