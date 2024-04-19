@@ -19,6 +19,8 @@ def get_wotd():
     wotd=[item for item in wotd if item!=""]
     wotd=[wotd[i] for i in (0,1,2,7,8)]
     wotd[0] = ', '.join(wotd[0].split(', ')[1:]) #Remove day.
+    date_obj = datetime.datetime.strptime(wotd[0], "%B %d, %Y") # Convert the string to a datetime object
+    wotd[0] = date_obj.strftime("%d.%m.%y") # Format the datetime object to "DD.MM.YY" format
     wotd[1] = wotd[1].strip().title() #clean big space and capitalize first letter.
     wotd[2] = wotd[2].lstrip() #Get rid of leading long blank space.
     wotd[3] = wotd[3].rstrip() #Get rid of following blank space.
