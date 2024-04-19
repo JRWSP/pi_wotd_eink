@@ -34,7 +34,7 @@ def wotd_to_display(wotd):
     HBlackImage = Image.new('1', (epd_w, epd_h), 255) #255(white)
 
     draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer.
-    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 13)
+    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 14)
     font_word = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 20)
     font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
