@@ -13,18 +13,18 @@ epd.init()           # initialize the display
 
 def get_wotd():
     url='https://www.dictionary.com/e/word-of-the-day/'
-    r=requests.get(url)
-    soup=BeautifulSoup(r.content,'html.parser')
-    wotd=soup.find(class_="wotd-item").get_text().split("\n")
-    wotd=[item for item in wotd if item!=""]
-    wotd=[wotd[i] for i in (0,1,2,7,8)]
-    wotd[0] = ', '.join(wotd[0].split(', ')[1:]) #Remove day.
-    date_obj = datetime.datetime.strptime(wotd[0], "%B %d, %Y") # Convert the string to a datetime object
-    wotd[0] = date_obj.strftime("%d.%m.%y") # Format the datetime object to "DD.MM.YY" format
-    wotd[1] = wotd[1].strip().title() #clean big space and capitalize first letter.
-    wotd[2] = wotd[2].lstrip() #Get rid of leading long blank space.
-    wotd[3] = wotd[3].rstrip() #Get rid of following blank space.
-    return wotd
+    try:
+        r=requests.get(url)
+        soup=BeautifulSoup(r.content,'html.parser')
+        wotd=soup.find(class_="wotd-item").get_text().split("\n")
+        wotd=[item for item in wotd if item!=""]
+        wotd=[wotd[i] for i in (0,1,2,7,8)]
+        wotd[0] = ', '.join(wotd[0].split(', ')[1:]) #Remove day.
+        wotd[1] = wotd[1].strip().title() #clean big space and capitalize first letter.
+        wotd[2] = wotd[2].lstrip() #Get rid of loeading long blank space.
+        return wotd
+    except requests.exceptions.RequestException as e:
+        raise Exception(e)
 
 def wotd_to_display(wotd):
     date, word, phonetic, word_type, definition = wotd
@@ -34,11 +34,11 @@ def wotd_to_display(wotd):
     HBlackImage = Image.new('1', (epd_w, epd_h), 255) #255(white)
 
     draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer.
-    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 14)
+    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 15)
     font_word = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 20)
     font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
-    draw.text((2, 2), "-Word of the Day- "+date, font = font_date, fill = 0) #draw date
+    draw.text((2, 2), date, font = font_date, fill = 0) #draw date
     draw.text((2,42), word_type+" "+phonetic, font=font_def, fill=0) #draw word type and phonetic.
     draw.text((5, 20), word, font = font_word, fill = 0) #draw word
     definition = textwrap.wrap(definition,width=36) #draw meaning
@@ -50,11 +50,30 @@ def wotd_to_display(wotd):
     HBlackImage = HBlackImage.rotate(180, expand=1)
     epd.display(epd.getbuffer(HBlackImage))
 
+def display_error(e):
+    print("Showing error message on display", e)    # prints to console, not the display, for debugging
+    epd.Clear()      # clear the display
+
+    epd_w, epd_h = display.EPD_HEIGHT, display.EPD_WIDTH #reverse for lanscape orientation. 
+    HBlackImage = Image.new('1', (epd_w, epd_h), 255) #255(white)
+
+    draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer.
+    font_e = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 15)
+    err_lines = textwrap.wrap(str(e)+", try again in 60s.",width=32) #draw meaning
+    y=0
+    for err_line in err_lines:
+        draw.text((5, 10+y), err_line, font = font_e, fill = 0)
+        y+=15
+
+    HBlackImage = HBlackImage.rotate(180, expand=1)
+    epd.display(epd.getbuffer(HBlackImage))
+
 def check_and_call():
     #Call for first time after reboot.
     print("Clear...")    # prints to console, not the display, for debugging
     epd.Clear()      # clear the display
-    wotd_to_display(get_wotd())
+    wotd = get_wotd()
+    wotd_to_display(wotd)
     # Get the current time
     current_time = datetime.datetime.now()
     print("Function called on:", current_time)
@@ -80,4 +99,9 @@ def check_and_call():
 
 # Run the loop continuously
 while True:
-    check_and_call()
+    try:
+        check_and_call()
+    except Exception as e:
+        display_error(e)
+        print("Try again in the next 60s.")
+        time.sleep(60)
