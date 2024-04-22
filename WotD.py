@@ -40,7 +40,7 @@ def wotd_to_display(wotd):
     font_word = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 20)
     font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
-    draw.text((2, 2), "--Word of the Day-- " date, font = font_date, fill = 0) #draw date
+    draw.text((2, 2), "--Word of the Day-- " + date, font = font_date, fill = 0) #draw date
     draw.text((2,42), word_type+" "+phonetic, font=font_def, fill=0) #draw word type and phonetic.
     draw.text((5, 20), word, font = font_word, fill = 0) #draw word
     definition = textwrap.wrap(definition,width=36) #draw meaning
