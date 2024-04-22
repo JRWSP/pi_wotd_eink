@@ -20,6 +20,8 @@ def get_wotd():
         wotd=[item for item in wotd if item!=""]
         wotd=[wotd[i] for i in (0,1,2,7,8)]
         wotd[0] = ', '.join(wotd[0].split(', ')[1:]) #Remove day.
+        date_obj = datetime.datetime.strptime(wotd[0], "%B %d, %Y") # Convert the string to a datetime object
+        wotd[0] = date_obj.strftime("%d.%m.%y") # Format the datetime object to "DD.MM.YY" format
         wotd[1] = wotd[1].strip().title() #clean big space and capitalize first letter.
         wotd[2] = wotd[2].lstrip() #Get rid of loeading long blank space.
         return wotd
@@ -34,11 +36,11 @@ def wotd_to_display(wotd):
     HBlackImage = Image.new('1', (epd_w, epd_h), 255) #255(white)
 
     draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer.
-    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 15)
+    font_date = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 14)
     font_word = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 20)
     font_def = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 12)
 
-    draw.text((2, 2), date, font = font_date, fill = 0) #draw date
+    draw.text((2, 2), "--Word of the Day-- " date, font = font_date, fill = 0) #draw date
     draw.text((2,42), word_type+" "+phonetic, font=font_def, fill=0) #draw word type and phonetic.
     draw.text((5, 20), word, font = font_word, fill = 0) #draw word
     definition = textwrap.wrap(definition,width=36) #draw meaning
