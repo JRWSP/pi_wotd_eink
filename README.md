@@ -52,8 +52,8 @@ This setup of Pi zero is based on [dr-mod](https://github.com/dr-mod/zero-btc-sc
    After=network.target
   
    [Service]
-   ExecStart=/usr/bin/python3 -u main.py
-   WorkingDirectory=/home/pi/word-of-the-day
+   ExecStart=/usr/bin/python3 -u WotD.py
+   WorkingDirectory=/home/pi/wotd
    StandardOutput=inherit
    StandardError=inherit
    Restart=always
