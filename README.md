@@ -78,6 +78,7 @@ This setup of Pi zero is based on [dr-mod](https://github.com/dr-mod/zero-btc-sc
 ## Support
 If this project help you reduce time to develop, you can give me a cup of coffee, or some beers so I can code more :)
 
-<a href="https://www.buymeacoffee.com/jrwsp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 108px !important;" ></a>
+BTC: bc1q2zpmmlz7ujwx2ghsgw5j7umv8wmpchplemvhtu <br>
+ETH: 0x80e98FcfED62970e35a57d2F1fefed7C89d5DaF4
 
-BTC: bc1qqr83k7p3z7ryxlungf56dp4nwnz5c00n8gc0de
+<a href="https://www.buymeacoffee.com/jrwsp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 108px !important;" ></a>
